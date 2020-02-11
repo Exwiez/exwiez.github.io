@@ -1,0 +1,71 @@
+<style>
+    button {
+        font-size: 120px;
+    }
+</style>
+<body>
+ <audio id=hardkick src="hard-kick.wav" preload="auto" controls="none" style="display: none;"></audio>
+ <audio id=loftkick src="lofi-kick.wav" preload="auto" controls="none" style="display: none;"></audio>
+ <audio id=perchhit src="perc-hit-21.wav" preload="auto" controls="none" style="display: none;"></audio>
+ <audio id=slowattackclap src="slow-attack-clap.wav" preload="auto" controls="none" style="display: none;"></audio>
+
+ <button id=startbtn onclick="start()">PLAY</button>
+ <button id=stopbtn  onclick="stop()" hidden >STOP</button>
+</body>
+<script>
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+var STATE_PLAY = false;
+
+
+async function start() {
+    let hardkick = document.getElementById("hardkick"); 
+    let clap = document.getElementById("slowattackclap");
+    let perchhit = document.getElementById("perchhit");
+    
+    let startbtn = document.getElementById("startbtn");
+    let stopbtn = document.getElementById("stopbtn");
+
+    stopbtn.hidden = false;
+    startbtn.hidden = true;
+
+    STATE_PLAY = true;
+
+    while (STATE_PLAY) {
+        hardkick.play()
+        await sleep(580);
+        if (Math.random() > 0.2 ) {
+            clap.play();
+        }
+        await sleep(390);
+        hardkick.play();
+        await sleep(390);
+        hardkick.play();
+        await sleep(300);
+        if (Math.random() > 0.2 ) {       
+            perchhit.play();
+            await sleep(90);
+            clap.play();
+            await sleep(580);
+        } else {
+            await sleep(670);
+        }
+    }
+    
+}
+
+function stop() {
+    let startbtn = document.getElementById("startbtn");
+    let stopbtn = document.getElementById("stopbtn");
+
+    stopbtn.hidden = true;
+    startbtn.hidden = false;
+
+    STATE_PLAY = false;
+}
+
+</script>
