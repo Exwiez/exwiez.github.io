@@ -23,7 +23,8 @@ var STATE_PLAY = false;
 
 
 async function start() {
-    let hardkick = document.getElementById("hardkick"); 
+    let hardkick = document.getElementById("hardkick");
+    let loftkick = document.getElementById("loftkick"); 
     let clap = document.getElementById("slowattackclap");
     let perchhit = document.getElementById("perchhit");
     
@@ -42,7 +43,7 @@ async function start() {
             clap.play();
         }
         await sleep(390);
-        hardkick.play();
+        loftkick.play();
         await sleep(390);
         hardkick.play();
         await sleep(300);
